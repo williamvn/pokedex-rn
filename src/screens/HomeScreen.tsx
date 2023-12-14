@@ -1,32 +1,28 @@
 import React from 'react'
-import { MenuList } from '../components/MenuList';
-import { SafeAreaView } from 'react-native';
-import { MenuOption } from '../types/menuOption';
+import { Image, StyleSheet, Text, View } from 'react-native';
+import { globalStyles } from '../theme/AppTheme';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export const HomeScreen = () => {
-  const menuItems: MenuOption[] = [
-    {
-      name: "Animation 101",
-      icon: "rocket-outline",
-      component: "SomeComponent"
-    },
-    {
-      name: "Inputs",
-      icon: "home-outline",
-      component: "SomeComponent"
-    },
-    {
-      name: "Forms",
-      icon: "car-outline",
-      component: "SomeComponent"
-    },
-  ]
-
-
+  const {top} = useSafeAreaInsets()
   return (
-    <SafeAreaView style={{flex: 1}}>
-      <MenuList menuItems={menuItems} title='Components'></MenuList>
-    </SafeAreaView>
+    <View style={{flex: 1}}>
+      <Image source={require("../assets/pokeball.png")} style={styles.image} />
+        <View style={globalStyles.container}>
+          <Text style={{ ...globalStyles.textHeader, marginTop: top}}>Pokedex</Text>
+        </View>
+    </View>
   )
 }
+
+const styles = StyleSheet.create({
+  image: {
+    width: 300,
+    height: 300,
+    position: 'absolute',
+    opacity: 0.5,
+    right: -100,
+    top: -100
+  }
+});
 
