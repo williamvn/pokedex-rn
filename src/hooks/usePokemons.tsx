@@ -4,16 +4,24 @@ import { PokeApiResponse, PokeApiInfo, PokeInfo } from "../types/PokemonApiRespo
 
 export const usePokemons = () => {
     const nextPageUrl = useRef("https://pokeapi.co/api/v2/pokemon?limit=40");
+    const [isLoading, setIsLoading] = useState(false)
     const [pokemons, setPokemons] = useState<PokeInfo[]>([]);
 
-    useEffect(() => {
+    const loadPokemons = () => {
+        setIsLoading(true);
         axios.get<PokeApiResponse>(nextPageUrl.current).then(response => {
             nextPageUrl.current = response.data.next;
             setPokemons([...pokemons, ...response.data.results.map(getPokeInfo)]);
+            setIsLoading(false);
         });
+    }
+
+
+    useEffect(() => {
+        loadPokemons();
     }, []);
 
-    return { pokemons, setPokemons };
+    return { pokemons, isLoading, loadPokemons };
 }
 
 const getPokeInfo = (pokemon: PokeApiInfo): PokeInfo => {
