@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { Image, StyleSheet, Text, View } from 'react-native'
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { PokeInfo } from '../types/PokemonApiResponse';
-import { default as colors} from "../assets/colors.json";
+import { default as colors } from "../assets/colors.json";
+import { useNavigation } from '@react-navigation/native';
+import { globalStyles } from '../theme/AppTheme';
 
 interface PokeListProps {
     pokemon: PokeInfo;
@@ -9,23 +11,26 @@ interface PokeListProps {
 
 
 export const PokeCard = ({ pokemon }: PokeListProps) => {
-    const [bgColor, setBgColor] = useState('gray')
+    const [bgColor, setBgColor] = useState('gray');
+    const navigation = useNavigation<any>();
 
     useEffect(() => {
-        // This is work around to set some colors to the card since the tool to extract colors from pokemons is not working
-        const rndIndex = Math.floor((Math.random() * colors.length)); 
-        setBgColor(colors[rndIndex])
+        // This is a work around to set some colors to the card since the tool to extract colors from pokemons is not working
+        const rndIndex = Math.floor((Math.random() * colors.length));
+        setBgColor(colors[rndIndex]);
     }, [pokemon]);
 
 
     return (
-        <View style={{ ...styles.card, backgroundColor: bgColor }}>
-            <Image source={{ uri: pokemon.picture }} style={styles.pokeImage} />
-            <Text style={styles.pokemonTitle}>{pokemon.name}{'\n#' + pokemon.id}</Text>
-            <View style={styles.pokeBallWrapper}>
-                <Image source={require("../assets/white-pokeball.png")} style={styles.pokeBall} />
+        <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.navigate("Details", { ...pokemon, color: bgColor })}>
+            <View style={{ ...styles.card, backgroundColor: bgColor }}>
+                <Image source={{ uri: pokemon.picture }} style={styles.pokeImage} />
+                <Text style={globalStyles.pokemonTitle}>{pokemon.name}{'\n#' + pokemon.id}</Text>
+                <View style={styles.pokeBallWrapper}>
+                    <Image source={require("../assets/white-pokeball.png")} style={styles.pokeBall} />
+                </View>
             </View>
-        </View>
+        </TouchableOpacity>
     )
 }
 const styles = StyleSheet.create({
@@ -63,17 +68,5 @@ const styles = StyleSheet.create({
         right: -30,
         bottom: -30,
         opacity: 0.3
-    },
-    pokemonTitle: {
-        textTransform: 'uppercase',
-        fontSize: 32,
-        fontWeight: 'bold',
-        fontStyle: 'italic',
-        letterSpacing: 0,
-        color: 'white',
-        opacity: 0.9,
-        textAlign: 'right', 
-        marginBottom: 10, 
-        marginLeft: 20,
-    },
+    }
 });

@@ -30,6 +30,7 @@ const getPokeInfo = (pokemon: PokeApiInfo): PokeInfo => {
     return {
         id,
         name: pokemon.name,
-        picture: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`
+        picture: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`,
+        url: pokemon.url
     }
 }
