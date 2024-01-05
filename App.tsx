@@ -6,7 +6,7 @@ import { SafeAreaViewComponent, StatusBar } from 'react-native';
 const App = () => {
   return (
     <NavigationContainer>
-      <StatusBar barStyle={"dark-content"} backgroundColor={"transparent"} translucent={true}/>
+      <StatusBar barStyle={"dark-content"} backgroundColor={"transparent"} translucent={true} />
       <StackNavigator />
     </NavigationContainer>
   )

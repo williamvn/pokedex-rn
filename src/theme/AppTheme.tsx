@@ -2,7 +2,11 @@ import { StyleSheet } from "react-native";
 
 export const globalStyles = StyleSheet.create({
     textHeader: {
-        fontSize: 30
+        fontSize: 30,
+        color: 'rgba(0, 0, 0, 0.8)'
+    },
+    text: {
+        color: 'rgba(0, 0, 0, 0.8)'
     },
     container: {
         margin: 10

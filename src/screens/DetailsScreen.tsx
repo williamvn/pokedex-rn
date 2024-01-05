@@ -25,6 +25,7 @@ export const DetailsScreen = ({ navigation, route }: DetailsProps) => {
                 </View>
             </View>
             <PokeDetails pokemon={pokemon}></PokeDetails>
+            <Image source={require("../assets/pokeball.png")} style={styles.pokeBallDark} />
         </>
 
     )
@@ -33,7 +34,7 @@ export const DetailsScreen = ({ navigation, route }: DetailsProps) => {
 const styles = StyleSheet.create({
     container: {
         // flex: 0.4,
-        height: 340,
+        height: 370,
         display: "flex",
         justifyContent: 'flex-end',
         alignItems: 'center',
@@ -52,6 +53,15 @@ const styles = StyleSheet.create({
         height: 500,
         position: 'absolute',
         bottom: -20,
+        // transform: [{rotate: '45deg'}],
+        opacity: 0.3
+    },
+    pokeBallDark: {
+        width: 500,
+        height: 500,
+        position: 'absolute',
+        bottom: -150,
+        right: -50,
         // transform: [{rotate: '45deg'}],
         opacity: 0.3
     },

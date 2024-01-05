@@ -15,17 +15,17 @@ export const PokeDetails = ({ pokemon }: PokeDetailsProps) => {
             <View style={globalStyles.container}>
                 <View style={styles.subheader}>
                     <Text style={globalStyles.textHeader}>Types</Text>
-                    <Text>{pokemonDetails?.types.map(type => type.type.name).join(", ")}</Text>
+                    <Text style={globalStyles.text}>{pokemonDetails?.types.map(type => type.type.name).join(", ")}</Text>
                 </View>
                 <View style={styles.subheader}>
                     <Text style={globalStyles.textHeader}>Abilities</Text>
-                    <Text>{pokemonDetails?.abilities.map(skill => skill.ability.name).join(", ")}</Text>
+                    <Text style={globalStyles.text}>{pokemonDetails?.abilities.map(skill => skill.ability.name).join(", ")}</Text>
                 </View>
                 <View style={styles.subheader}>
                     <Text style={globalStyles.textHeader}>Stats</Text>
-                    {pokemonDetails?.stats.map(stat => <View key={stat.stat.name} style={{ flexDirection: 'row', justifyContent: 'space-between', width: 300 }}>
-                        <Text>{stat.stat.name}</Text>
-                        <Text>{stat.base_stat}</Text>
+                    {pokemonDetails?.stats.map(stat => <View key={stat.stat.name} style={{ flexDirection: 'row', justifyContent: 'space-between',  }}>
+                        <Text style={globalStyles.text}>{stat.stat.name}</Text>
+                        <Text style={globalStyles.text}>{stat.base_stat}</Text>
                     </View>
                     )}
                 </View>
