@@ -10,11 +10,11 @@ export const HomeScreen = () => {
   const { pokemons, loadPokemons, isLoading } = usePokemons();
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, paddingTop: top }}>
       <Image source={require("../assets/pokeball.png")} style={styles.image} />
       <View style={globalStyles.container}>
-        <Text style={{ ...globalStyles.textHeader, marginTop: top }}>Pokedex</Text>
         <FlatList
+          ListHeaderComponent={<Text style={{ ...globalStyles.textHeader}}>Pokedex</Text>}
           data={pokemons}
           renderItem={({ item }) => <PokeCard pokemon={item} />}
           onEndReached={loadPokemons}
