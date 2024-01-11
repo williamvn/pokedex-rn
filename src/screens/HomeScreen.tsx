@@ -7,15 +7,14 @@ import { PokeCard } from '../components/PokeCard';
 import { useAnimation } from '../hooks/useAnimation';
 
 export const HomeScreen = () => {
-  const { top } = useSafeAreaInsets();
   const { pokemons, loadPokemons, isLoading } = usePokemons();
   const { value, animate } = useAnimation(1, Easing.ease);
   return (
-    <View style={{ flex: 1, paddingTop: top }}>
+    <View style={{ flex: 1 }}>
       <Image source={require("../assets/pokeball.png")} style={styles.image} />
-      <View style={globalStyles.container}>
+      <View style={{...globalStyles.container, marginTop: 0}}>
         <FlatList
-          ListHeaderComponent={<Animated.View style={{ opacity: value }}><Text style={{ ...globalStyles.textHeader, marginTop: 10}}>Pokedex</Text></Animated.View>}
+          ListHeaderComponent={<Animated.View style={{ opacity: value }}><Text style={{ ...globalStyles.textHeader, marginTop: 50}}>Pokedex</Text></Animated.View>}
           data={pokemons}
           renderItem={({ item }) => <PokeCard pokemon={item} />}
           onEndReached={loadPokemons}

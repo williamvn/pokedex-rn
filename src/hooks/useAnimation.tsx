@@ -20,7 +20,6 @@ export const useAnimation = (initValue: number = 0, easing: ((value: number) => 
     };
 
     const animate = (endValue: number = 100, duration: number = 100, callback?: () => void) => {
-        console.log("Animating to", endValue)
         Animated.timing(value, { toValue: endValue, duration: duration, useNativeDriver: true, easing: easing }).start(callback);
     }
 
