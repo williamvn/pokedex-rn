@@ -8,6 +8,12 @@ export const globalStyles = StyleSheet.create({
     text: {
         color: 'rgba(0, 0, 0, 0.8)'
     },
+    secondary: {
+        color: '#AB8FA8'
+    },
+    tertiary: {
+        color: "#999999"
+    },
     container: {
         margin: 10
     },

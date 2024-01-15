@@ -1,7 +1,6 @@
 import React from 'react'
 import { ActivityIndicator, Animated, Easing, FlatList, Image, StyleSheet, Text, View } from 'react-native';
 import { globalStyles } from '../theme/AppTheme';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { usePokemons } from '../hooks/usePokemons';
 import { PokeCard } from '../components/PokeCard';
 import { useAnimation } from '../hooks/useAnimation';
