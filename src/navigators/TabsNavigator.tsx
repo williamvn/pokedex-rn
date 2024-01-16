@@ -1,6 +1,5 @@
 import React from 'react'
 import { HomeStackNavigator } from './HomeStackNavigator';
-import { SearchScreen } from '../screens/SearchScreen';
 
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import Icon from "react-native-vector-icons/Ionicons";

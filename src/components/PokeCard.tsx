@@ -33,7 +33,8 @@ export const PokeCard = ({ pokemon, size }: PokeCardProps) => {
         </TouchableOpacity>
     )
 }
-const lgStyles = StyleSheet.create({
+
+const baseStyles = StyleSheet.create({
     card: {
         display: 'flex',
         flexDirection: 'row',
@@ -42,7 +43,22 @@ const lgStyles = StyleSheet.create({
         padding: 10,
         margin: 10,
         marginHorizontal: 13,
-        borderRadius: 10,
+        borderRadius: 10
+    },
+    pokeBall: {
+        width: 100,
+        height: 100,
+        position: 'absolute',
+        right: -30,
+        top: -30,
+        opacity: 0.3
+    }
+ });
+
+const lgStyles = StyleSheet.create({
+    ...baseStyles,
+    card: {
+        ...baseStyles.card,
         height: 150
     },
     pokeImage: {
@@ -60,27 +76,13 @@ const lgStyles = StyleSheet.create({
         bottom: 0,
         position: 'absolute',
         overflow: 'hidden'
-    },
-    pokeBall: {
-        width: 200,
-        height: 200,
-        position: 'absolute',
-        right: -30,
-        bottom: -30,
-        opacity: 0.3
     }
 });
 
 const sStyles = StyleSheet.create({
+    ...baseStyles,
     card: {
-        display: 'flex',
-        flexDirection: 'row',
-        backgroundColor: "gray",
-        justifyContent: 'flex-end',
-        padding: 10,
-        margin: 10,
-        marginHorizontal: 13,
-        borderRadius: 10,
+        ...baseStyles.card,
         height: 120,
         width: 170
     },
@@ -99,13 +101,5 @@ const sStyles = StyleSheet.create({
         top: 0,
         position: 'absolute',
         overflow: 'hidden'
-    },
-    pokeBall: {
-        width: 100,
-        height: 100,
-        position: 'absolute',
-        right: -30,
-        top: -30,
-        opacity: 0.3
     }
 });
