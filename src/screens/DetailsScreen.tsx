@@ -1,7 +1,7 @@
 import { StackScreenProps } from '@react-navigation/stack'
 import React from 'react'
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { RootStackParamList } from '../navigators/StackNavigator'
+import { RootStackParamList } from '../navigators/HomeStackNavigator'
 import Icon from "react-native-vector-icons/Ionicons";
 import { PokeDetails } from '../components/PokeDetails';
 import { globalStyles } from '../theme/AppTheme';
@@ -14,7 +14,7 @@ export const DetailsScreen = ({ navigation, route }: DetailsProps) => {
         <>
             <View style={{ ...styles.container, backgroundColor: pokemon.color }}>
                 <View style={styles.header}>
-                    <TouchableOpacity activeOpacity={0.2} onPress={() => navigation.pop()}>
+                    <TouchableOpacity activeOpacity={0.2} onPress={() => navigation.goBack()}>
                         <Icon name="arrow-back-outline" size={40} color="white" />
                     </TouchableOpacity>
                     <Text style={globalStyles.pokemonTitle}>{pokemon.name}</Text>
