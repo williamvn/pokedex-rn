@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { PokeApiResponse, PokeApiInfo, PokeInfo } from "../types/PokemonApiResponse";
 
 export const useAllPokemons = () => {
-    const url = "https://pokeapi.co/api/v2/pokemon?limit=120";
+    const url = "https://pokeapi.co/api/v2/pokemon?limit=1200";
     const [isLoading, setIsLoading] = useState(false)
     const [pokemons, setPokemons] = useState<PokeInfo[]>([]);
     useEffect(() => {
@@ -11,9 +11,7 @@ export const useAllPokemons = () => {
         console.log("Getting Full pokemon list");
         axios.get<PokeApiResponse>(url).then(response => {
             setPokemons([...pokemons, ...response.data.results.map(getPokeInfo)]);
-            setTimeout(() => {
-                setIsLoading(false);
-            }, 5000)
+            setIsLoading(false);
         });
     }, []);
 

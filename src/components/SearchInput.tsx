@@ -1,25 +1,51 @@
-import React, { useState } from 'react'
-import { Dimensions, StyleSheet, TextInput, View } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { Dimensions, StyleSheet, TextInput, View, Text } from 'react-native';
 import Icon from "react-native-vector-icons/Ionicons";
 import { globalStyles } from '../theme/AppTheme';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useRef } from 'react';
+import { useDebounce } from '../hooks/useDebounce';
 
 const { width: screenWidth } = Dimensions.get('screen');
 
-export const SearchInput = () => {
+interface SearchInputProps {
+    valueChange?: (v: string) => void;
+    onFocus?: () => void;
+    onFocusOut?: () => void;
+}
+
+export const SearchInput = ({ valueChange, onFocus, onFocusOut }: SearchInputProps) => {
     const { top } = useSafeAreaInsets();
     const [barOpacity, setBarOpacity] = useState(0.7);
-    
+    const [text, setText] = useState('');
+    const debounceValue = useDebounce(text, 200);
+
+    const onFocusHandler = () => {
+        setBarOpacity(1);
+        if (onFocus) onFocus();
+    }
+
+    const onFocusOutHandler = () => {
+        setBarOpacity(0.7);
+        if (onFocusOut) onFocusOut();
+    }
+
+    useEffect(() => {
+        if (valueChange) {
+            valueChange(debounceValue);
+        }
+    }, [debounceValue]);
+
+
     return (
         <View style={{ ...styles.inputContainer, marginTop: top + 10 }}>
             <TextInput
                 style={{ ...styles.input, opacity: barOpacity }}
-                // onChangeText={valueChange}
-                // value={value}
+                onChangeText={setText}
+                value={text}
                 autoCorrect={false}
-                onFocus={() => setBarOpacity(1)}
-                onBlur={() => setBarOpacity(0.7)}
+                onFocus={onFocusHandler}
+                onBlur={onFocusOutHandler}
                 placeholder="Search Pokemons"
             />
             <Icon name='search-outline' color={globalStyles.secondary.color} style={styles.inputIcon} size={25} />

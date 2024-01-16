@@ -1,15 +1,12 @@
 import { useEffect, useState } from "react";
 
-export const useDebounce = <T>(data: any, ms: number): T => {
-    const [debounceData, setDebounceData] = useState(data);
-    const [timeoutTracker, setTimeoutTracker] = useState<number>();
+export const useDebounce = <T>(data: T, ms: number): T => {
+    const [debounceData, setDebounceData] = useState<T>(data);
     useEffect(() => {
-        if(timeoutTracker) {
-            clearTimeout(timeoutTracker);
-        }
-        setTimeoutTracker(setTimeout(() => {
+        const timeoutTracker = setTimeout(() => {
             setDebounceData(data);
-        }, ms));
+        }, ms);
+        return () => clearTimeout(timeoutTracker);
     }, [data]);
     return debounceData;
 }
