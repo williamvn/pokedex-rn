@@ -8,6 +8,9 @@ export const globalStyles = StyleSheet.create({
     text: {
         color: 'rgba(0, 0, 0, 0.8)'
     },
+    primary: {
+        color: "#89607F"
+    },
     secondary: {
         color: '#AB8FA8'
     },
