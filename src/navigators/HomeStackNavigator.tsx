@@ -4,7 +4,7 @@ import { DetailsScreen } from '../screens/DetailsScreen';
 import { PokeInfo } from '../types/PokemonApiResponse';
 
 export type RootStackParamList = {
-  Home: undefined,
+  Pokedex: undefined,
   Details: PokeInfo
 }
 
@@ -13,7 +13,7 @@ const Stack = createStackNavigator<RootStackParamList>();
 export const HomeStackNavigator = () => {
   return (
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Pokedex" component={HomeScreen} />
         <Stack.Screen name="Details" component={DetailsScreen} />
       </Stack.Navigator>
   );
