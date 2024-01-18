@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Dimensions, StyleSheet, TextInput, View, Text } from 'react-native';
+import { Dimensions, StyleSheet, TextInput, View, Text, Keyboard } from 'react-native';
 import Icon from "react-native-vector-icons/Ionicons";
 import { globalStyles } from '../theme/AppTheme';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -19,6 +19,7 @@ export const SearchInput = ({ valueChange, onFocus, onFocusOut }: SearchInputPro
     const [barOpacity, setBarOpacity] = useState(0.7);
     const [text, setText] = useState('');
     const debounceValue = useDebounce(text, 200);
+    const inputRef = useRef<TextInput>(null);
 
     const onFocusHandler = () => {
         setBarOpacity(1);
@@ -36,17 +37,33 @@ export const SearchInput = ({ valueChange, onFocus, onFocusOut }: SearchInputPro
         }
     }, [debounceValue]);
 
+    useEffect(() => {
+        const keyboardDidHideListener = Keyboard.addListener(
+            'keyboardDidHide',
+            () => {
+                onFocusOutHandler();
+                inputRef.current?.blur();
+            }
+        );
+
+        return () => {
+            keyboardDidHideListener.remove();
+        };
+    }, []);
+
 
     return (
         <View style={{ ...styles.inputContainer, marginTop: top + 10 }}>
             <TextInput
-                style={{ ...styles.input, opacity: barOpacity }}
+                ref={inputRef}
+                style={{ ...styles.input, opacity: barOpacity, ...globalStyles.text }}
                 onChangeText={setText}
                 value={text}
                 autoCorrect={false}
                 onFocus={onFocusHandler}
-                onBlur={onFocusOutHandler}
+                // onEndEditing={onFocusOutHandler}
                 placeholder="Search Pokemons"
+                placeholderTextColor={globalStyles.tertiary.color}
             />
             <Icon name='search-outline' color={globalStyles.secondary.color} style={styles.inputIcon} size={25} />
         </View>
